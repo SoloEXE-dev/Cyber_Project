@@ -1,0 +1,32 @@
+Role (IT(employee), www-data, root)
+
+Local backup server
+Cloud server
+Window (employee, client)
+
+Cloud: 
+	IT
+	access: system maintenance, bug fix
+
+Two C++ program
+	Linux(cloud) send socket heartbeat, and "Allahu Akbar" (C++)
+	windows(client) receive socket heartbeat (C++)
+
+[No need sync]
+
+Step 1:
+Create a file name(passwd, key, classified) in the web-server
+
+Step2:
+File permission only allow (root, www-data)(read, write)
+
+Step3:
+C++ program run in root permission to scan access of the file
+C++ scan (read, write) (socket Heartbeat)
+
+Step4:
+File or C++ code should only be contain create date(no read or write) for both file
+If C++ was found it will stop the (heartbeat) which cause "Allahu Akbar"
+
+Step5:
+Window(client) if heartbeat stopped then notify IT employee or admin for backup time

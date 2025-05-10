@@ -1,0 +1,48 @@
+<Content> = cmd command
+Docker 1 = local server (backup)
+Docker 2 = cloud server (victim)
+
+docker setup:
+	<docker network rm multinet>
+	<docker_setup.bat>
+
+
+First  attempt (root access changed)
+
+	--> Docker 2
+		<docker exec -it multi-web-2 bin/bash>
+		<cd /main/dummy> (all test file is in dummy directory)
+		<stat -c "%a %n" tps.txt> (show permission)
+		<chmod 421 tps.txt> (change perms simulate hack)
+		<cd /programs> (script directory)
+		<python3 reader.py> (delete directory)
+
+	--> Docker 1
+		Reset the files from local server
+			<docker exec -it multi-web-1 bin/bash> (enter docker 1)
+			<cd /programs> (script directory)
+			<sh reback.sh> (upload files to cloud)
+
+Second  attempt (file encryption)
+
+	--> Docker 2
+		<docker exec -it multi-web-2 bin/bash>
+		<cd /programs>
+		<nano /main/dummy/tps.txt> (show content of dummy file)
+		<python3 jumpjump.py >
+		</main/dummy/>
+		<nano /main/dummy/tps.txt.ransom> (show content of encrypted dummy file)
+
+		<python3 reader.py> (activate scanner)
+
+	--> Docker 1
+		Reset the files from local server
+			<docker exec -it multi-web-1 bin/bash> (enter docker 1)
+			<cd /programs> (script directory)
+			<sh reback.sh> (upload files to cloud)
+
+(Activate auto backup)
+
+	<mkdir backup>
+	<crontab -l> (show autobackup and auto delete)
+	<crontab -e> (edit crontab)

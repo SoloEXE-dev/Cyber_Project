@@ -1,0 +1,14 @@
+services:
+  web:
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - :80
+      - :22
+
+    volumes:
+      - ./app:/usr/share/ubuntu/html
+    deploy:
+      mode: replicated
+      replicas: 2
+

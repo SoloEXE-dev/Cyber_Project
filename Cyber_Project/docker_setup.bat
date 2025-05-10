@@ -1,0 +1,11 @@
+cd C:\Users\owent\multi
+
+docker compose up -d --build
+
+docker network create --driver=bridge --subnet=172.22.0.0/16 multinet
+
+docker network connect --ip 172.22.0.2 multinet multi-web-1
+
+docker network connect --ip 172.22.0.3 multinet multi-web-2
+
+docker network inspect multinet
